@@ -58,7 +58,7 @@ WMac no mueve, oculta ni modifica tus iconos, archivos, fondo de pantalla, regis
 Requisitos: Windows y el [SDK de .NET](https://dotnet.microsoft.com/download) 6 o posterior. Los proyectos usan .NET Framework 4.8 con WPF, y el SDK descarga los paquetes de NuGet al compilar.
 
 ```powershell
-git clone https://github.com/JuanVM2005/wmac.git
+git clone https://github.com/BlackCrowAgency/wmac-blackcrow.git
 cd wmac
 powershell -ExecutionPolicy Bypass -File .\build.ps1
 ```
