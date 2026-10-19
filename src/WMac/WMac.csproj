@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>WMac</AssemblyName>
+    <RootNamespace>WMac</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\WMac.ico</ApplicationIcon>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <Version>1.2.0</Version>
+    <FileVersion>1.2.0.0</FileVersion>
+    <Product>WMac Desktop</Product>
+    <AssemblyTitle>WMac Desktop</AssemblyTitle>
+    <Company>WMac</Company>
+    <Copyright>© 2026 WMac</Copyright>
+    <Description>Escritorio moderno con estética macOS para Windows 11</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Net.Http" />
+    <!-- Proyecciones WinRT (solo referencias): controles multimedia del sistema (GSMTC) para el widget de música -->
+    <PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.22621.2428" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\WMac.ico" />
+  </ItemGroup>
+
+</Project>

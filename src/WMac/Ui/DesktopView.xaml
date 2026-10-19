@@ -1,0 +1,107 @@
+<UserControl x:Class="WMac.DesktopView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WMac"
+             x:ClassModifier="internal"
+             Focusable="True" FocusVisualStyle="{x:Null}" AllowDrop="True"
+             FontFamily="Segoe UI" UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Grid x:Name="Root" ClipToBounds="True" Background="#FF0B0B12">
+        <!-- Fondo real con desenfoque suave -->
+        <ContentControl x:Name="WallpaperHost" IsHitTestVisible="False" Focusable="False"
+                        HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Rectangle IsHitTestVisible="False">
+            <Rectangle.Fill>
+                <RadialGradientBrush Center="0.5,0.45" GradientOrigin="0.5,0.45" RadiusX="0.75" RadiusY="0.75">
+                    <GradientStop Color="#14000000" Offset="0"/>
+                    <GradientStop Color="#59000000" Offset="1"/>
+                </RadialGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Grid x:Name="Work">
+            <Canvas x:Name="Stage" Background="Transparent">
+                <!-- Páginas de iconos -->
+                <Canvas x:Name="PagesHost" ClipToBounds="True">
+                    <Canvas.RenderTransform>
+                        <ScaleTransform x:Name="PagesZoom" ScaleX="1" ScaleY="1"/>
+                    </Canvas.RenderTransform>
+                    <Canvas x:Name="Strip">
+                        <Canvas.RenderTransform>
+                            <TranslateTransform x:Name="StripShift"/>
+                        </Canvas.RenderTransform>
+                    </Canvas>
+                </Canvas>
+                <TextBlock x:Name="EmptyText" Visibility="Collapsed" FontSize="15" Foreground="#B3FFFFFF" TextAlignment="Center"/>
+                <StackPanel x:Name="Dots" Orientation="Horizontal"/>
+
+                <!-- Búsqueda -->
+                <Border x:Name="SearchPill" Height="36" CornerRadius="18" Background="#26FFFFFF" BorderThickness="1" Cursor="IBeam">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#80FFFFFF" Offset="0"/>
+                            <GradientStop Color="#1AFFFFFF" Offset="0.5"/>
+                            <GradientStop Color="#4DFFFFFF" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="16" ShadowDepth="4" Direction="270" Opacity="0.25"/>
+                    </Border.Effect>
+                    <Grid Margin="14,0,8,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Path Data="M 6.5,0 A 6.5,6.5 0 1 1 6.49,0 Z M 11.3,11.3 L 16,16" Stroke="#D9FFFFFF" StrokeThickness="1.8"
+                              StrokeStartLineCap="Round" StrokeEndLineCap="Round" Width="15" Height="15" Stretch="Uniform" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="SearchPlaceholder" Grid.Column="1" Text="Buscar" Margin="9,0,0,1" FontSize="14"
+                                   Foreground="#B3FFFFFF" VerticalAlignment="Center" IsHitTestVisible="False"/>
+                        <TextBox x:Name="SearchBox" Grid.Column="1" Style="{StaticResource BareTextBox}" FontSize="14"
+                                 Margin="7,0,0,0" VerticalAlignment="Center"/>
+                        <Button x:Name="SearchClear" Grid.Column="2" Style="{StaticResource MediaButton}" Visibility="Collapsed" ToolTip="Borrar búsqueda">
+                            <Path Data="M 0,0 L 8,8 M 8,0 L 0,8" Stroke="#E6FFFFFF" StrokeThickness="1.6" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                  Width="8" Height="8" Stretch="Uniform"/>
+                        </Button>
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="Chips" Orientation="Horizontal" Visibility="Collapsed" Opacity="0"/>
+
+                <!-- Widgets -->
+                <local:ClockWidget x:Name="Clock"/>
+                <local:MusicWidget x:Name="Music"/>
+                <local:WeatherWidget x:Name="Weather"/>
+                <local:CalendarWidget x:Name="Calendar"/>
+
+                <Rectangle x:Name="Marquee" Visibility="Collapsed" RadiusX="6" RadiusY="6" StrokeThickness="1" IsHitTestVisible="False"/>
+                <Canvas x:Name="DragLayer" IsHitTestVisible="False"/>
+            </Canvas>
+
+            <!-- Carpeta abierta -->
+            <Grid x:Name="FolderOverlay" Visibility="Collapsed">
+                <Rectangle x:Name="FolderDim" Fill="#FF000000" Opacity="0"/>
+                <local:GlassCard x:Name="FolderPanel" HorizontalAlignment="Left" VerticalAlignment="Top" CornerRadius="34" Padding="0"
+                                 RenderTransformOrigin="0,0">
+                    <local:GlassCard.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="FolderScale" ScaleX="1" ScaleY="1"/>
+                            <TranslateTransform x:Name="FolderShift"/>
+                        </TransformGroup>
+                    </local:GlassCard.RenderTransform>
+                    <Grid>
+                        <TextBox x:Name="FolderTitle" Style="{StaticResource BareTextBox}" FontSize="22" FontWeight="SemiBold"
+                                 HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" MinWidth="120" Margin="0,22,0,0"/>
+                        <Canvas x:Name="FolderGrid" ClipToBounds="True" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Canvas x:Name="FolderStrip">
+                                <Canvas.RenderTransform>
+                                    <TranslateTransform x:Name="FolderStripShift"/>
+                                </Canvas.RenderTransform>
+                            </Canvas>
+                        </Canvas>
+                        <StackPanel x:Name="FolderDots" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,12"/>
+                    </Grid>
+                </local:GlassCard>
+                <Canvas x:Name="FolderDragLayer" IsHitTestVisible="False"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

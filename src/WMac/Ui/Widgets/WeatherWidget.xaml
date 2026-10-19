@@ -1,0 +1,36 @@
+<UserControl x:Class="WMac.WeatherWidget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WMac"
+             x:ClassModifier="internal"
+             Width="300" Height="330" FontFamily="Segoe UI">
+    <local:GlassCard CornerRadius="30" Padding="22,18,22,16">
+        <Grid>
+            <StackPanel x:Name="DataPanel">
+                <Grid>
+                    <StackPanel>
+                        <TextBlock x:Name="PlaceText" FontSize="15" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Margin="0,0,64,0"
+                                   Foreground="{DynamicResource GlassText}"/>
+                        <TextBlock x:Name="TempText" FontSize="56" FontWeight="Light" Margin="-3,-4,0,-4" Foreground="{DynamicResource GlassText}"/>
+                    </StackPanel>
+                    <local:WeatherIcon x:Name="MainIcon" Width="58" Height="58" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-4,-6,0"/>
+                </Grid>
+                <TextBlock x:Name="CondText" FontSize="13.5" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource GlassText}"/>
+                <TextBlock x:Name="RangeText" FontSize="12.5" Margin="0,2,0,0" Foreground="{DynamicResource GlassSubText}"/>
+                <Border Height="1" Margin="0,12,0,10" Background="{DynamicResource GlassDim}" Opacity="0.6"/>
+                <UniformGrid x:Name="HoursGrid" Columns="5"/>
+                <StackPanel x:Name="DaysPanel" Margin="0,8,0,0"/>
+            </StackPanel>
+
+            <StackPanel x:Name="SetupPanel" VerticalAlignment="Center" Visibility="Collapsed">
+                <local:WeatherIcon x:Name="SetupIcon" Width="64" Height="64" HorizontalAlignment="Center"/>
+                <TextBlock Text="Clima" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,10,0,4"
+                           Foreground="{DynamicResource GlassText}"/>
+                <TextBlock x:Name="SetupText" FontSize="12.5" TextWrapping="Wrap" TextAlignment="Center" Margin="6,0,6,14"
+                           Foreground="{DynamicResource GlassSubText}"
+                           Text="Añade tu ciudad para ver el pronóstico."/>
+                <Button x:Name="SetupButton" Content="Configurar" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+    </local:GlassCard>
+</UserControl>

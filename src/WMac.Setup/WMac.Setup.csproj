@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>WMac-Setup</AssemblyName>
+    <RootNamespace>WMacSetup</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\WMac\Assets\WMac.ico</ApplicationIcon>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <Version>1.2.0</Version>
+    <FileVersion>1.2.0.0</FileVersion>
+    <Product>WMac Desktop</Product>
+    <AssemblyTitle>Instalador de WMac Desktop</AssemblyTitle>
+    <Company>WMac</Company>
+    <Copyright>© 2026 WMac</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- build.ps1 copia aquí la app compilada antes de compilar el instalador -->
+    <EmbeddedResource Include="payload\WMac.exe" LogicalName="WMac.exe" />
+    <EmbeddedResource Include="payload\WMac.exe.config" LogicalName="WMac.exe.config" Condition="Exists('payload\WMac.exe.config')" />
+  </ItemGroup>
+
+</Project>

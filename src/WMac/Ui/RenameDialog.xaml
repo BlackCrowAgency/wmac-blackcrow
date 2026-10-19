@@ -1,0 +1,21 @@
+<Window x:Class="WMac.RenameDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:ClassModifier="internal"
+        Title="WMac — Cambiar nombre" Width="440" SizeToContent="Height" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="True" Topmost="True"
+        FontFamily="Segoe UI" Background="Transparent" Foreground="{DynamicResource DialogText}">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="34" GlassFrameThickness="-1" ResizeBorderThickness="0" UseAeroCaptionButtons="True" CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
+    <Grid Background="{DynamicResource DialogTint}" TextElement.Foreground="{DynamicResource DialogText}">
+        <StackPanel Margin="28,40,28,24">
+            <TextBlock Text="Cambiar nombre" FontSize="19" FontWeight="SemiBold" Margin="0,0,0,12"/>
+            <TextBox x:Name="NameBox" Style="{StaticResource GlassTextBox}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                <Button x:Name="CancelButton" Content="Cancelar" Style="{StaticResource PillButton}" IsCancel="True"/>
+                <Button x:Name="OkButton" Content="Cambiar nombre" Style="{StaticResource PrimaryButton}" IsDefault="True" Margin="10,0,0,0"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
